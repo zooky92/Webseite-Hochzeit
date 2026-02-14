@@ -7,6 +7,13 @@ let guestCount = 0;
 
 const menuOptions = ["Fleisch", "Fisch", "Vegetarisch", "Vegan"];
 
+const removeGuest = (index) => {
+  const element = document.getElementById(`guest-${index}`);
+  if (element) {
+    element.remove();
+  }
+};
+
 const buildGuestField = (index) => {
   const wrapper = document.createElement("div");
   wrapper.className = "guest-card";
@@ -55,14 +62,7 @@ const buildGuestField = (index) => {
   removeBtn.addEventListener("click", (event) => {
     event.preventDefault();
     removeGuest(index);
-  
-
-const removeGuest = (index) => {
-  const element = document.getElementById(`guest-${index}`);
-  if (element) {
-    element.remove();
-  }
-};});
+  });
 
   wrapper.append(title, nameLabel, lastNameLabel, menuLabel, intoleranceLabel, removeBtn);
   return wrapper;
