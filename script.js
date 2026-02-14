@@ -61,12 +61,14 @@ const renderGuestFields = (count) => {
 
 attendanceRadios.forEach((radio) => {
   radio.addEventListener("change", (event) => {
-    const isYes = event.target.value === "yes";
-    attendanceYes.classList.toggle("hidden", !isYes);
-    attendanceNo.hidden = isYes;
+    const guestInfo = document.getElementById("guest-info");
+    guestInfo.classList.remove("hidden");
 
-    if (isYes) {
+    const value = event.target.value;
+    if (value === "yes") {
       renderGuestFields(parseInt(guestCountInput.value, 10));
+    } else {
+      renderGuestFields(1);
     }
   });
 });

@@ -33,7 +33,7 @@
 
         <form id="rsvp-form" class="rsvp" novalidate>
           <fieldset class="choice" aria-label="Teilnahme">
-            <legend>Entscheidung</legend>
+            <legend>Entscheidung (Bitte gebt eure Namen ein)</legend>
             <label class="radio">
               <input type="radio" name="attendance" value="yes" />
               <span>Wir kommen</span>
@@ -44,7 +44,7 @@
             </label>
           </fieldset>
 
-          <div id="attendance-yes" class="hidden" aria-live="polite">
+          <div id="guest-info" class="hidden" aria-live="polite">
             <label>
               Mit wie vielen Personen kommen wir?
               <input type="number" name="guestCount" id="guestCount" min="1" max="10" value="1" />
@@ -52,10 +52,6 @@
 
             <div id="guest-fields" class="guest-fields"></div>
           </div>
-
-          <p class="muted" id="attendance-no" hidden>
-            Schade, dass ihr nicht dabei sein könnt. Danke für eure Rückmeldung.
-          </p>
 
           <button type="submit" class="primary">Antwort speichern</button>
           <p class="disclaimer">Dieses Formular speichert keine Daten automatisch.</p>
