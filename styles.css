@@ -185,6 +185,22 @@ select:focus {
   filter: brightness(0.95);
 }
 
+.secondary {
+  border: 2px solid var(--accent);
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.secondary:hover {
+  background: var(--accent-soft);
+}
+
 .muted,
 .disclaimer {
   color: var(--muted);

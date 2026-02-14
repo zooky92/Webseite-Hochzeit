@@ -1,36 +1,38 @@
-const attendanceYes = document.getElementById("attendance-yes");
-const attendanceNo = document.getElementById("attendance-no");
-const guestCountInput = document.getElementById("guestCount");
+const attendanceYes = document.getElementById("guest-info");
 const guestFields = document.getElementById("guest-fields");
+const addGuestBtn = document.getElementById("add-guest-btn");
 const attendanceRadios = document.querySelectorAll("input[name='attendance']");
+
+let guestCount = 0;
 
 const menuOptions = ["Fleisch", "Fisch", "Vegetarisch", "Vegan"];
 
 const buildGuestField = (index) => {
   const wrapper = document.createElement("div");
   wrapper.className = "guest-card";
+  wrapper.id = `guest-${index}`;
 
   const title = document.createElement("h3");
-  title.textContent = `Person ${index + 1}`;
+  title.textContent = `Person ${index}`;
 
   const nameLabel = document.createElement("label");
   nameLabel.textContent = "Vorname";
   const nameInput = document.createElement("input");
   nameInput.type = "text";
-  nameInput.name = `guest_${index + 1}_firstName`;
+  nameInput.name = `guest_${index}_firstName`;
   nameLabel.appendChild(nameInput);
 
   const lastNameLabel = document.createElement("label");
   lastNameLabel.textContent = "Nachname";
   const lastNameInput = document.createElement("input");
   lastNameInput.type = "text";
-  lastNameInput.name = `guest_${index + 1}_lastName`;
+  lastNameInput.name = `guest_${index}_lastName`;
   lastNameLabel.appendChild(lastNameInput);
 
   const menuLabel = document.createElement("label");
   menuLabel.textContent = "Menü";
   const menuSelect = document.createElement("select");
-  menuSelect.name = `guest_${index + 1}_menu`;
+  menuSelect.name = `guest_${index}_menu`;
   menuOptions.forEach((option) => {
     const item = document.createElement("option");
     item.value = option;
@@ -43,66 +45,54 @@ const buildGuestField = (index) => {
   intoleranceLabel.textContent = "Unverträglichkeiten";
   const intoleranceInput = document.createElement("input");
   intoleranceInput.type = "text";
-  intoleranceInput.name = `guest_${index + 1}_intolerances`;
+  intoleranceInput.name = `guest_${index}_intolerances`;
   intoleranceLabel.appendChild(intoleranceInput);
 
   wrapper.append(title, nameLabel, lastNameLabel, menuLabel, intoleranceLabel);
   return wrapper;
 };
 
-const renderGuestFields = (count) => {
-  guestFields.innerHTML = "";
-  const safeCount = Number.isNaN(count) ? 0 : Math.min(Math.max(count, 1), 10);
-
-  for (let i = 0; i < safeCount; i += 1) {
-    guestFields.appendChild(buildGuestField(i));
-  }
+const addGuest = () => {
+  guestCount += 1;
+  guestFields.appendChild(buildGuestField(guestCount));
 };
 
 attendanceRadios.forEach((radio) => {
   radio.addEventListener("change", (event) => {
-    const guestInfo = document.getElementById("guest-info");
-    guestInfo.classList.remove("hidden");
-
-    const value = event.target.value;
-    if (value === "yes") {
-      renderGuestFields(parseInt(guestCountInput.value, 10));
-    } else {
-      renderGuestFields(1);
+    attendanceYes.classList.remove("hidden");
+    
+    if (guestCount === 0) {
+      addGuest();
     }
   });
 });
 
-guestCountInput.addEventListener("input", (event) => {
-  const value = parseInt(event.target.value, 10);
-  renderGuestFields(value);
+addGuestBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  addGuest();
 });
 
 document.getElementById("rsvp-form").addEventListener("submit", (event) => {
   event.preventDefault();
   submitToGoogleSheets();
 });
-guestCount: formData.get("guestCount"),
+
+const submitToGoogleSheets = async () => {
+  const form = document.getElementById("rsvp-form");
+  const formData = new FormData(form);
+
+  const data = {
+    attendance: formData.get("attendance"),
     guests: [],
   };
 
-  if (data.attendance === "yes") {
-    const guestCount = parseInt(data.guestCount, 10);
-    for (let i = 1; i <= guestCount; i += 1) {
-      data.guests.push({
-        firstName: formData.get(`guest_${i}_firstName`),
-        lastName: formData.get(`guest_${i}_la
-  };
-
-  if (data.attendance === "yes") {
-    const guestCount = parseInt(data.guestCount, 10);
-    for (let i = 1; i <= guestCount; i += 1) {
-      data.guests.push({
-        firstName: formData.get(`guest_${i}_firstName`),
-        menu: formData.get(`guest_${i}_menu`),
-        intolerances: formData.get(`guest_${i}_intolerances`),
-      });
-    }
+  for (let i = 1; i <= guestCount; i += 1) {
+    data.guests.push({
+      firstName: formData.get(`guest_${i}_firstName`),
+      lastName: formData.get(`guest_${i}_lastName`),
+      menu: formData.get(`guest_${i}_menu`),
+      intolerances: formData.get(`guest_${i}_intolerances`),
+    });
   }
 
   try {
@@ -114,7 +104,9 @@ guestCount: formData.get("guestCount"),
 
     alert("✓ Danke für eure Rückmeldung! Die Daten wurden gespeichert.");
     form.reset();
-    document.getElementById("attendance-yes").classList.add("hidden");
+    guestFields.innerHTML = "";
+    guestCount = 0;
+    document.getElementById("guest-info").classList.add("hidden");
   } catch (error) {
     console.error("Fehler beim Senden:", error);
     alert("Fehler beim Speichern. Bitte versuche es später erneut.");
