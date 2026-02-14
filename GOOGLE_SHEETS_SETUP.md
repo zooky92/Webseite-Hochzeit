@@ -14,7 +14,8 @@
      - H: Gast 2 Name, usw.
 
 2. **Google Apps Script erstellen:**
-   - Klicke `Tools > Script Editor`
+   - Klicke `Erweiterungen > Apps Script`
+   - Eine neue `.gs` Datei wird erstellt
    - Lösche default Code
    - Kopiere diesen Code:
 
