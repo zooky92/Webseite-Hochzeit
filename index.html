@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Marisa & Denny – Hochzeitseinladung</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <p class="eyebrow">Hochzeitseinladung</p>
+        <h1>Marisa &amp; Denny</h1>
+        <p class="subtitle">
+          Wir freuen uns, diesen besonderen Tag mit euch zu feiern und laden euch herzlich ein.
+        </p>
+      </header>
+
+      <section class="card" aria-labelledby="invite-title">
+        <h2 id="invite-title">Einladung</h2>
+        <p>
+          Bitte gebt uns bis zum <strong>Datum eintragen</strong> Bescheid, ob ihr dabei seid.
+          Wir freuen uns auf einen unvergesslichen Tag mit euch.
+        </p>
+        <p class="location">
+          <strong>Location:</strong> Adresse eintragen, Ort eintragen
+        </p>
+        <p class="note">Hinweis: Datum und Adresse bitte ersetzen.</p>
+      </section>
+
+      <section class="card" aria-labelledby="rsvp-title">
+        <h2 id="rsvp-title">Rückmeldung</h2>
+
+        <form id="rsvp-form" class="rsvp" novalidate>
+          <fieldset class="choice" aria-label="Teilnahme">
+            <legend>Entscheidung</legend>
+            <label class="radio">
+              <input type="radio" name="attendance" value="yes" />
+              <span>Wir kommen</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="attendance" value="no" />
+              <span>Wir kommen nicht</span>
+            </label>
+          </fieldset>
+
+          <div id="attendance-yes" class="hidden" aria-live="polite">
+            <div class="grid two">
+              <label>
+                Vorname
+                <input type="text" name="firstName" autocomplete="given-name" />
+              </label>
+              <label>
+                Nachname
+                <input type="text" name="lastName" autocomplete="family-name" />
+              </label>
+            </div>
+
+            <label>
+              Mit wie vielen Personen kommen wir?
+              <input type="number" name="guestCount" id="guestCount" min="1" max="10" value="1" />
+            </label>
+
+            <div id="guest-fields" class="guest-fields"></div>
+          </div>
+
+          <p class="muted" id="attendance-no" hidden>
+            Schade, dass ihr nicht dabei sein könnt. Danke für eure Rückmeldung.
+          </p>
+
+          <button type="submit" class="primary">Antwort speichern</button>
+          <p class="disclaimer">Dieses Formular speichert keine Daten automatisch.</p>
+        </form>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
