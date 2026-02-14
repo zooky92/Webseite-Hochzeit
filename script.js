@@ -69,8 +69,11 @@ const buildGuestField = (index) => {
 };
 
 const addGuest = () => {
-  guestCount += 1;
-  guestFields.appendChild(buildGuestField(guestCount));
+  // Zähle die aktuellen Gäste und füge einen mit der nächsten Nummer hinzu
+  const currentCount = document.querySelectorAll(".guest-card").length;
+  const nextIndex = currentCount + 1;
+  guestCount = nextIndex;
+  guestFields.appendChild(buildGuestField(nextIndex));
 };
 
 attendanceRadios.forEach((radio) => {
