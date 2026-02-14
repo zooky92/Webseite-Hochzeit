@@ -7,11 +7,20 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="language-selector">
+      <label for="language-select">Sprache / Language / Jezik:</label>
+      <select id="language-select">
+        <option value="de">Deutsch</option>
+        <option value="en">English</option>
+        <option value="hr">Hrvatski</option>
+      </select>
+    </div>
+
     <main class="page">
       <header class="hero">
-        <p class="eyebrow">Hochzeitseinladung</p>
-        <h1>Marisa &amp; Denny</h1>
-        <p class="subtitle">
+        <p class="eyebrow" data-i18n="eyebrow">Hochzeitseinladung</p>
+        <h1 data-i18n="title">Marisa &amp; Denny</h1>
+        <p class="subtitle" data-i18n="subtitle">
           Wir freuen uns, diesen besonderen Tag mit euch zu feiern und laden euch herzlich ein.
         </p>
       </header>
@@ -29,33 +38,34 @@
       </section>
 
       <section class="card" aria-labelledby="rsvp-title">
-        <h2 id="rsvp-title">Rückmeldung</h2>
+        <h2 id="rsvp-title" data-i18n="rsvpTitle">Rückmeldung</h2>
 
         <form id="rsvp-form" class="rsvp" novalidate>
           <fieldset class="choice" aria-label="Teilnahme">
-            <legend>Entscheidung (Bitte gebt eure Namen auch ein wenn ihr nicht kommt damit wir einfacher planen können)</legend>
+            <legend data-i18n="decisionLabel">Entscheidung (Bitte gebt eure Namen auch ein wenn ihr nicht kommt damit wir einfacher planen können)</legend>
             <label class="radio">
               <input type="radio" name="attendance" value="yes" />
-              <span>Wir kommen</span>
+              <span data-i18n="attending">Wir kommen</span>
             </label>
             <label class="radio">
               <input type="radio" name="attendance" value="no" />
-              <span>Wir kommen nicht</span>
+              <span data-i18n="notAttending">Wir kommen nicht</span>
             </label>
           </fieldset>
 
           <div id="guest-info" class="hidden" aria-live="polite">
             <div id="guest-fields" class="guest-fields"></div>
-            <button type="button" id="add-guest-btn" class="secondary">Weitere Person hinzufügen</button>
+            <button type="button" id="add-guest-btn" class="secondary" data-i18n="addGuest">Weitere Person hinzufügen</button>
           </div>
 
-          <button type="submit" class="primary">Antwort speichern</button>
-          <p class="disclaimer">Dieses Formular speichert keine Daten automatisch.</p>
+          <button type="submit" class="primary" data-i18n="submit">Antwort speichern</button>
+          <p class="disclaimer" data-i18n="disclaimer">Dieses Formular speichert keine Daten automatisch.</p>
         </form>
       </section>
     </main>
 
     <script src="config.js"></script>
+    <script src="translations.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

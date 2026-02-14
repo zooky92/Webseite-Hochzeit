@@ -5,16 +5,8 @@ const attendanceRadios = document.querySelectorAll("input[name='attendance']");
 
 let guestCount = 0;
 
-const menuOptions = ["Fleisch", "Fisch", "Vegetarisch", "Vegan"];
-
-const removeGuest = (index) => {
-  const element = document.getElementById(`guest-${index}`);
-  if (element) {
-    element.remove();
-  }
-};
-
-const buildGuestField = (index) => {
+function buildGuestField(index) {
+  const lang = getCurrentLanguage();
   const wrapper = document.createElement("div");
   wrapper.className = "guest-card";
   wrapper.id = `guest-${index}`;
@@ -23,23 +15,24 @@ const buildGuestField = (index) => {
   title.textContent = `Person ${index}`;
 
   const nameLabel = document.createElement("label");
-  nameLabel.textContent = "Vorname";
+  nameLabel.textContent = getTranslation("firstName", lang);
   const nameInput = document.createElement("input");
   nameInput.type = "text";
   nameInput.name = `guest_${index}_firstName`;
   nameLabel.appendChild(nameInput);
 
   const lastNameLabel = document.createElement("label");
-  lastNameLabel.textContent = "Nachname";
+  lastNameLabel.textContent = getTranslation("lastName", lang);
   const lastNameInput = document.createElement("input");
   lastNameInput.type = "text";
   lastNameInput.name = `guest_${index}_lastName`;
   lastNameLabel.appendChild(lastNameInput);
 
   const menuLabel = document.createElement("label");
-  menuLabel.textContent = "Menü";
+  menuLabel.textContent = getTranslation("menu", lang);
   const menuSelect = document.createElement("select");
   menuSelect.name = `guest_${index}_menu`;
+  const menuOptions = getTranslation("menuOptions", lang);
   menuOptions.forEach((option) => {
     const item = document.createElement("option");
     item.value = option;
@@ -49,7 +42,7 @@ const buildGuestField = (index) => {
   menuLabel.appendChild(menuSelect);
 
   const intoleranceLabel = document.createElement("label");
-  intoleranceLabel.textContent = "Unverträglichkeiten";
+  intoleranceLabel.textContent = getTranslation("intolerances", lang);
   const intoleranceInput = document.createElement("input");
   intoleranceInput.type = "text";
   intoleranceInput.name = `guest_${index}_intolerances`;
@@ -58,7 +51,7 @@ const buildGuestField = (index) => {
   const removeBtn = document.createElement("button");
   removeBtn.type = "button";
   removeBtn.className = "remove-guest";
-  removeBtn.textContent = "Person entfernen";
+  removeBtn.textContent = getTranslation("removeGuest", lang);
   removeBtn.addEventListener("click", (event) => {
     event.preventDefault();
     removeGuest(index);
@@ -66,7 +59,7 @@ const buildGuestField = (index) => {
 
   wrapper.append(title, nameLabel, lastNameLabel, menuLabel, intoleranceLabel, removeBtn);
   return wrapper;
-};
+}
 
 const addGuest = () => {
   // Zähle die aktuellen Gäste und füge einen mit der nächsten Nummer hinzu
@@ -75,13 +68,30 @@ const addGuest = () => {
   guestCount = nextIndex;
   guestFields.appendChild(buildGuestField(nextIndex));
 };
-
-attendanceRadios.forEach((radio) => {
-  radio.addEventListener("change", (event) => {
-    attendanceYes.classList.remove("hidden");
+removeGuest = (index) => {
+  const element = document.getElementById(`guest-${index}`);
+  if (element) {
+    document.getElementById("guest-info").classList.remove("hidden");
     
     if (guestCount === 0) {
       addGuest();
+    }
+  });
+});
+
+addGuestBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  addGuest();
+});
+
+// Sprachenwahl-Event-Listener
+document.addEventListener("DOMContentLoaded", () => {
+  const languageSelect = document.getElementById("language-select");
+  if (languageSelect) {
+    languageSelect.addEventListener("change", (event) => {
+      setLanguage(event.target.value);
+    });
+  }t();
     }
   });
 });
