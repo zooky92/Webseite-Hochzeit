@@ -60,8 +60,7 @@ function buildGuestField(index) {
   return wrapper;
 }
 
-const addGuest = () => {
-  // ZremoveGuest = (index) => {
+const removeGuest = (index) => {
   const element = document.getElementById(`guest-${index}`);
   if (element) {
     element.remove();
@@ -76,13 +75,24 @@ const addGuest = () => {
 };
 
 attendanceRadios.forEach((radio) => {
-  radio.addEventListener("change", (event) =>etElementById("guest-info").classList.remove("hidden");
-    
+  radio.addEventListener("change", (event) => {
+    document.getElementById("guest-info").classList.remove("hidden");
     if (guestCount === 0) {
       addGuest();
     }
   });
 });
+
+addGuestBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  addGuest();
+});
+
+document.getElementById("rsvp-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  submitToGoogleSheets();
+});
+
 const submitToGoogleSheets = async () => {
   const lang = getCurrentLanguage();
   const form = document.getElementById("rsvp-form");
@@ -137,10 +147,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const currentLang = getCurrentLanguage();
   document.querySelector(`.flag-btn[data-lang="${currentLang}"]`)?.classList.add("active");
-})   guestCount = 0;
-    document.getElementById("guest-info").classList.add("hidden");
-  } catch (error) {
-    console.error("Fehler beim Senden:", error);
-    alert("Fehler beim Speichern. Bitte versuche es später erneut.");
-  }
-};
+});
