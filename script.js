@@ -102,14 +102,17 @@ const submitToGoogleSheets = async () => {
     guests: [],
   };
 
-  for (let i = 1; i <= guestCount; i += 1) {
+  // Sammle nur die Gäste, die noch vorhanden sind
+  const guestCards = document.querySelectorAll(".guest-card");
+  guestCards.forEach((card) => {
+    const guestId = card.id.replace("guest-", "");
     data.guests.push({
-      firstName: formData.get(`guest_${i}_firstName`),
-      lastName: formData.get(`guest_${i}_lastName`),
-      menu: formData.get(`guest_${i}_menu`),
-      intolerances: formData.get(`guest_${i}_intolerances`),
+      firstName: formData.get(`guest_${guestId}_firstName`),
+      lastName: formData.get(`guest_${guestId}_lastName`),
+      menu: formData.get(`guest_${guestId}_menu`),
+      intolerances: formData.get(`guest_${guestId}_intolerances`),
     });
-  }
+  });
 
   try {
     const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
