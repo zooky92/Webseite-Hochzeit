@@ -48,7 +48,23 @@ const buildGuestField = (index) => {
   intoleranceInput.name = `guest_${index}_intolerances`;
   intoleranceLabel.appendChild(intoleranceInput);
 
-  wrapper.append(title, nameLabel, lastNameLabel, menuLabel, intoleranceLabel);
+  const removeBtn = document.createElement("button");
+  removeBtn.type = "button";
+  removeBtn.className = "remove-guest";
+  removeBtn.textContent = "Person entfernen";
+  removeBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    removeGuest(index);
+  
+
+const removeGuest = (index) => {
+  const element = document.getElementById(`guest-${index}`);
+  if (element) {
+    element.remove();
+  }
+};});
+
+  wrapper.append(title, nameLabel, lastNameLabel, menuLabel, intoleranceLabel, removeBtn);
   return wrapper;
 };
 
