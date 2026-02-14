@@ -66,6 +66,36 @@ body {
   margin: 0 auto;
 }
 
+.language-flags {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px;
+  margin-bottom: -10px;
+}
+
+.flag-btn {
+  font-size: 2rem;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 8px 12px;
+  transition: all 0.2s ease;
+  opacity: 0.6;
+}
+
+.flag-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.flag-btn.active {
+  opacity: 1;
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
 .hero {
   text-align: center;
   display: grid;

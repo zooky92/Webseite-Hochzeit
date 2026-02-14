@@ -1,4 +1,3 @@
-const attendanceYes = document.getElementById("guest-info");
 const guestFields = document.getElementById("guest-fields");
 const addGuestBtn = document.getElementById("add-guest-btn");
 const attendanceRadios = document.querySelectorAll("input[name='attendance']");
@@ -62,51 +61,30 @@ function buildGuestField(index) {
 }
 
 const addGuest = () => {
-  // Zähle die aktuellen Gäste und füge einen mit der nächsten Nummer hinzu
+  // ZremoveGuest = (index) => {
+  const element = document.getElementById(`guest-${index}`);
+  if (element) {
+    element.remove();
+  }
+};
+
+const addGuest = () => {
   const currentCount = document.querySelectorAll(".guest-card").length;
   const nextIndex = currentCount + 1;
   guestCount = nextIndex;
   guestFields.appendChild(buildGuestField(nextIndex));
 };
-removeGuest = (index) => {
-  const element = document.getElementById(`guest-${index}`);
-  if (element) {
-    document.getElementById("guest-info").classList.remove("hidden");
+
+attendanceRadios.forEach((radio) => {
+  radio.addEventListener("change", (event) =>etElementById("guest-info").classList.remove("hidden");
     
     if (guestCount === 0) {
       addGuest();
     }
   });
 });
-
-addGuestBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  addGuest();
-});
-
-// Sprachenwahl-Event-Listener
-document.addEventListener("DOMContentLoaded", () => {
-  const languageSelect = document.getElementById("language-select");
-  if (languageSelect) {
-    languageSelect.addEventListener("change", (event) => {
-      setLanguage(event.target.value);
-    });
-  }t();
-    }
-  });
-});
-
-addGuestBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  addGuest();
-});
-
-document.getElementById("rsvp-form").addEventListener("submit", (event) => {
-  event.preventDefault();
-  submitToGoogleSheets();
-});
-
 const submitToGoogleSheets = async () => {
+  const lang = getCurrentLanguage();
   const form = document.getElementById("rsvp-form");
   const formData = new FormData(form);
 
@@ -115,7 +93,6 @@ const submitToGoogleSheets = async () => {
     guests: [],
   };
 
-  // Sammle nur die Gäste, die noch vorhanden sind
   const guestCards = document.querySelectorAll(".guest-card");
   guestCards.forEach((card) => {
     const guestId = card.id.replace("guest-", "");
@@ -134,10 +111,33 @@ const submitToGoogleSheets = async () => {
       body: JSON.stringify(data),
     });
 
-    alert("✓ Danke für eure Rückmeldung! Die Daten wurden gespeichert.");
+    alert(getTranslation("successMessage", lang));
     form.reset();
     guestFields.innerHTML = "";
     guestCount = 0;
+    document.getElementById("guest-info").classList.add("hidden");
+  } catch (error) {
+    console.error("Fehler beim Senden:", error);
+    alert(getTranslation("errorMessage", lang));
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const flagBtns = document.querySelectorAll(".flag-btn");
+  flagBtns.forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
+      const lang = btn.getAttribute("data-lang");
+      setLanguage(lang);
+
+      flagBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+
+  const currentLang = getCurrentLanguage();
+  document.querySelector(`.flag-btn[data-lang="${currentLang}"]`)?.classList.add("active");
+})   guestCount = 0;
     document.getElementById("guest-info").classList.add("hidden");
   } catch (error) {
     console.error("Fehler beim Senden:", error);
