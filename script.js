@@ -20,6 +20,13 @@ const buildGuestField = (index) => {
   nameInput.name = `guest_${index + 1}_firstName`;
   nameLabel.appendChild(nameInput);
 
+  const lastNameLabel = document.createElement("label");
+  lastNameLabel.textContent = "Nachname";
+  const lastNameInput = document.createElement("input");
+  lastNameInput.type = "text";
+  lastNameInput.name = `guest_${index + 1}_lastName`;
+  lastNameLabel.appendChild(lastNameInput);
+
   const menuLabel = document.createElement("label");
   menuLabel.textContent = "Menü";
   const menuSelect = document.createElement("select");
@@ -39,7 +46,7 @@ const buildGuestField = (index) => {
   intoleranceInput.name = `guest_${index + 1}_intolerances`;
   intoleranceLabel.appendChild(intoleranceInput);
 
-  wrapper.append(title, nameLabel, menuLabel, intoleranceLabel);
+  wrapper.append(title, nameLabel, lastNameLabel, menuLabel, intoleranceLabel);
   return wrapper;
 };
 
@@ -73,17 +80,16 @@ document.getElementById("rsvp-form").addEventListener("submit", (event) => {
   event.preventDefault();
   submitToGoogleSheets();
 });
-
-const submitToGoogleSheets = async () => {
-  const form = document.getElementById("rsvp-form");
-  const formData = new FormData(form);
-
-  const data = {
-    attendance: formData.get("attendance"),
-    firstName: formData.get("firstName"),
-    lastName: formData.get("lastName"),
-    guestCount: formData.get("guestCount"),
+guestCount: formData.get("guestCount"),
     guests: [],
+  };
+
+  if (data.attendance === "yes") {
+    const guestCount = parseInt(data.guestCount, 10);
+    for (let i = 1; i <= guestCount; i += 1) {
+      data.guests.push({
+        firstName: formData.get(`guest_${i}_firstName`),
+        lastName: formData.get(`guest_${i}_la
   };
 
   if (data.attendance === "yes") {
