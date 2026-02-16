@@ -1,3 +1,45 @@
+// ==================== PASSWORD PROTECTION ====================
+const CORRECT_PASSWORD = "mdh060626";
+
+function initPasswordProtection() {
+  const overlay = document.getElementById("password-overlay");
+  const input = document.getElementById("password-input");
+  const submitBtn = document.getElementById("password-submit");
+  const errorMsg = document.getElementById("password-error");
+  const mainContent = document.getElementById("main-content");
+
+  // Check if password was already entered in this session
+  if (sessionStorage.getItem("passwordAuthenticated") === "true") {
+    overlay.style.display = "none";
+    mainContent.style.display = "block";
+    return;
+  }
+
+  function authenticate() {
+    if (input.value === CORRECT_PASSWORD) {
+      sessionStorage.setItem("passwordAuthenticated", "true");
+      overlay.style.display = "none";
+      mainContent.style.display = "block";
+      errorMsg.textContent = "";
+    } else {
+      errorMsg.textContent = "Passwort falsch. Bitte versuchen Sie es erneut.";
+      input.value = "";
+      input.focus();
+    }
+  }
+
+  submitBtn.addEventListener("click", authenticate);
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      authenticate();
+    }
+  });
+
+  // Focus input on load
+  input.focus();
+}
+
+// ==================== RSVP FORM LOGIC ====================
 const guestFields = document.getElementById("guest-fields");
 const addGuestBtn = document.getElementById("add-guest-btn");
 const attendanceRadios = document.querySelectorAll("input[name='attendance']");
@@ -183,6 +225,9 @@ const submitToGoogleSheets = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize password protection first
+  initPasswordProtection();
+
   const flagBtns = document.querySelectorAll(".flag-btn");
   flagBtns.forEach((btn) => {
     btn.addEventListener("click", (event) => {

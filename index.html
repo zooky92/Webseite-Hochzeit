@@ -7,13 +7,29 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- Password Protection Modal -->
+    <div id="password-overlay" class="password-overlay">
+      <div class="password-modal">
+        <h2>Zugriff geschützt</h2>
+        <p>Bitte geben Sie das Passwort ein:</p>
+        <input
+          type="password"
+          id="password-input"
+          placeholder="Passwort"
+          autocomplete="off"
+        />
+        <button id="password-submit">Bestätigen</button>
+        <p id="password-error" class="password-error"></p>
+      </div>
+    </div>
+
     <div class="language-flags">
       <button class="flag-btn active" data-lang="de" title="Deutsch">🇩🇪</button>
       <button class="flag-btn" data-lang="en" title="English">🇬🇧</button>
       <button class="flag-btn" data-lang="hr" title="Hrvatski">🇭🇷</button>
     </div>
 
-    <main class="page">
+    <main class="page" id="main-content" style="display: none;">
       <header class="hero">
         <p class="eyebrow" data-i18n="eyebrow">Hochzeitsfeier</p>
         <h1 data-i18n="title">Marisa &amp; Denny</h1>
