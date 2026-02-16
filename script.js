@@ -4,7 +4,7 @@ const attendanceRadios = document.querySelectorAll("input[name='attendance']");
 
 let guestCount = 0;
 
-function buildGuestField(index) {
+function buildGuestField(index, includeMenu = true) {
   const lang = getCurrentLanguage();
   const wrapper = document.createElement("div");
   wrapper.className = "guest-card";
@@ -27,26 +27,6 @@ function buildGuestField(index) {
   lastNameInput.name = `guest_${index}_lastName`;
   lastNameLabel.appendChild(lastNameInput);
 
-  const menuLabel = document.createElement("label");
-  menuLabel.textContent = getTranslation("menu", lang);
-  const menuSelect = document.createElement("select");
-  menuSelect.name = `guest_${index}_menu`;
-  const menuOptions = getTranslation("menuOptions", lang);
-  menuOptions.forEach((option) => {
-    const item = document.createElement("option");
-    item.value = option;
-    item.textContent = option;
-    menuSelect.appendChild(item);
-  });
-  menuLabel.appendChild(menuSelect);
-
-  const intoleranceLabel = document.createElement("label");
-  intoleranceLabel.textContent = getTranslation("intolerances", lang);
-  const intoleranceInput = document.createElement("input");
-  intoleranceInput.type = "text";
-  intoleranceInput.name = `guest_${index}_intolerances`;
-  intoleranceLabel.appendChild(intoleranceInput);
-
   const removeBtn = document.createElement("button");
   removeBtn.type = "button";
   removeBtn.className = "remove-guest";
@@ -56,7 +36,33 @@ function buildGuestField(index) {
     removeGuest(index);
   });
 
-  wrapper.append(title, nameLabel, lastNameLabel, menuLabel, intoleranceLabel, removeBtn);
+  wrapper.append(title, nameLabel, lastNameLabel);
+
+  if (includeMenu) {
+    const menuLabel = document.createElement("label");
+    menuLabel.textContent = getTranslation("menu", lang);
+    const menuSelect = document.createElement("select");
+    menuSelect.name = `guest_${index}_menu`;
+    const menuOptions = getTranslation("menuOptions", lang);
+    menuOptions.forEach((option) => {
+      const item = document.createElement("option");
+      item.value = option;
+      item.textContent = option;
+      menuSelect.appendChild(item);
+    });
+    menuLabel.appendChild(menuSelect);
+    wrapper.appendChild(menuLabel);
+
+    const intoleranceLabel = document.createElement("label");
+    intoleranceLabel.textContent = getTranslation("intolerances", lang);
+    const intoleranceInput = document.createElement("input");
+    intoleranceInput.type = "text";
+    intoleranceInput.name = `guest_${index}_intolerances`;
+    intoleranceLabel.appendChild(intoleranceInput);
+    wrapper.appendChild(intoleranceLabel);
+  }
+
+  wrapper.appendChild(removeBtn);
   return wrapper;
 }
 
@@ -67,25 +73,69 @@ const removeGuest = (index) => {
   }
 };
 
-const addGuest = () => {
+const addGuest = (includeMenu = true) => {
   const currentCount = document.querySelectorAll(".guest-card").length;
   const nextIndex = currentCount + 1;
   guestCount = nextIndex;
-  guestFields.appendChild(buildGuestField(nextIndex));
+  guestFields.appendChild(buildGuestField(nextIndex, includeMenu));
+};
+
+const updateGuestCardsLanguage = () => {
+  const attendanceInput = document.querySelector("input[name='attendance']:checked");
+  if (!attendanceInput) return;
+
+  const includeMenu = attendanceInput.value === "yes";
+  const cards = document.querySelectorAll(".guest-card");
+  if (!cards.length) return;
+
+  const existingGuests = [];
+  cards.forEach((card) => {
+    const guestId = card.id.replace("guest-", "");
+    existingGuests.push({
+      firstName: document.querySelector(`input[name='guest_${guestId}_firstName']`)?.value || "",
+      lastName: document.querySelector(`input[name='guest_${guestId}_lastName']`)?.value || "",
+      menu: document.querySelector(`select[name='guest_${guestId}_menu']`)?.value || "",
+      intolerances: document.querySelector(`input[name='guest_${guestId}_intolerances']`)?.value || "",
+    });
+  });
+
+  guestFields.innerHTML = "";
+  guestCount = 0;
+
+  existingGuests.forEach((guest, index) => {
+    const idx = index + 1;
+    addGuest(includeMenu);
+    const card = document.getElementById(`guest-${idx}`);
+    if (!card) return;
+
+    const firstNameInput = card.querySelector(`input[name='guest_${idx}_firstName']`);
+    const lastNameInput = card.querySelector(`input[name='guest_${idx}_lastName']`);
+    if (firstNameInput) firstNameInput.value = guest.firstName;
+    if (lastNameInput) lastNameInput.value = guest.lastName;
+
+    if (includeMenu) {
+      const menuSelect = card.querySelector(`select[name='guest_${idx}_menu']`);
+      const intoleranceInput = card.querySelector(`input[name='guest_${idx}_intolerances']`);
+      if (menuSelect && guest.menu) menuSelect.value = guest.menu;
+      if (intoleranceInput) intoleranceInput.value = guest.intolerances;
+    }
+  });
 };
 
 attendanceRadios.forEach((radio) => {
   radio.addEventListener("change", (event) => {
     document.getElementById("guest-info").classList.remove("hidden");
-    if (guestCount === 0) {
-      addGuest();
-    }
+    guestFields.innerHTML = "";
+    guestCount = 0;
+    const isAttending = event.target.value === "yes";
+    addGuest(isAttending);
   });
 });
 
 addGuestBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  addGuest();
+  const isAttending = document.querySelector("input[name='attendance']:checked")?.value === "yes";
+  addGuest(isAttending);
 });
 
 document.getElementById("rsvp-form").addEventListener("submit", (event) => {
@@ -140,6 +190,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const lang = btn.getAttribute("data-lang");
       setLanguage(lang);
 
+      // Aktualisiere vorhandene Gästekarten in die neue Sprache
+      updateGuestCardsLanguage();
+
       flagBtns.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
     });
@@ -147,4 +200,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const currentLang = getCurrentLanguage();
   document.querySelector(`.flag-btn[data-lang="${currentLang}"]`)?.classList.add("active");
+
+   const tabButtons = document.querySelectorAll(".tab-btn");
+   const tabPanels = document.querySelectorAll(".tab-panel");
+
+   tabButtons.forEach((btn) => {
+     btn.addEventListener("click", () => {
+       const target = btn.getAttribute("data-tab");
+
+       tabButtons.forEach((b) => b.classList.remove("active"));
+       btn.classList.add("active");
+
+       tabPanels.forEach((panel) => {
+         if (panel.getAttribute("data-tab") === target) {
+           panel.classList.add("tab-panel-active");
+         } else {
+           panel.classList.remove("tab-panel-active");
+         }
+       });
+     });
+   });
 });

@@ -15,50 +15,78 @@
 
     <main class="page">
       <header class="hero">
-        <p class="eyebrow" data-i18n="eyebrow">Hochzeitseinladung</p>
+        <p class="eyebrow" data-i18n="eyebrow">Hochzeitsfeier</p>
         <h1 data-i18n="title">Marisa &amp; Denny</h1>
         <p class="subtitle" data-i18n="subtitle">
-          Wir freuen uns, diesen besonderen Tag mit euch zu feiern und laden euch herzlich ein.
+         Wir würden uns freuen, wenn ihr diesen besonderen Tag mit uns teilt.
         </p>
       </header>
 
-      <section class="card" aria-labelledby="invite-title">
-        <h2 id="invite-title">Einladung</h2>
-        <p>
-          Bitte gebt uns bis zum <strong>Datum eintragen</strong> Bescheid, ob ihr dabei seid.
-          Wir freuen uns auf einen unvergesslichen Tag mit euch.
-        </p>
-        <p class="location">
-          <strong>Location:</strong> Adresse eintragen, Ort eintragen
-        </p>
-        <p class="note">Hinweis: Datum und Adresse bitte ersetzen.</p>
-      </section>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="rsvp" data-i18n="tabRsvp">Zu- / Absage</button>
+        <button class="tab-btn" data-tab="info" data-i18n="tabInfo">Infos</button>
+      </div>
 
-      <section class="card" aria-labelledby="rsvp-title">
-        <h2 id="rsvp-title" data-i18n="rsvpTitle">Rückmeldung</h2>
+      <div class="tab-panel tab-panel-active" data-tab="rsvp">
+        <section class="card" aria-labelledby="invite-title">
+          <p data-i18n="inviteText">
+            Bitte gebt uns bis  <strong>ende März</strong> Bescheid, ob ihr dabei sein könnt.
+            Wir freuen uns auf einen unvergesslichen Tag mit euch.
+          </p>
+          <p class="location" data-i18n="location">
+            <strong>Location:</strong> Adresse eintragen, Ort eintragen
+          </p>
+          <p class="note" data-i18n="note">Hinweis: Datum und Adresse bitte ersetzen.</p>
+        </section>
 
-        <form id="rsvp-form" class="rsvp" novalidate>
-          <fieldset class="choice" aria-label="Teilnahme">
-            <legend data-i18n="decisionLabel">Entscheidung (Bitte gebt eure Namen auch ein wenn ihr nicht kommt damit wir einfacher planen können)</legend>
-            <label class="radio">
-              <input type="radio" name="attendance" value="yes" />
-              <span data-i18n="attending">Wir kommen</span>
-            </label>
-            <label class="radio">
-              <input type="radio" name="attendance" value="no" />
-              <span data-i18n="notAttending">Wir kommen nicht</span>
-            </label>
-          </fieldset>
+        <section class="card" aria-labelledby="rsvp-title">
+          <h2 id="rsvp-title" data-i18n="rsvpTitle">Teilnahme</h2>
 
-          <div id="guest-info" class="hidden" aria-live="polite">
-            <div id="guest-fields" class="guest-fields"></div>
-            <button type="button" id="add-guest-btn" class="secondary" data-i18n="addGuest">Weitere Person hinzufügen</button>
-          </div>
+          <form id="rsvp-form" class="rsvp" novalidate>
+            <fieldset class="choice" aria-label="Teilnahme">
+              <legend data-i18n="decisionLabel">Sagt uns bitte Bescheid, ob ihr teilnehmt oder nicht, und tragt in jedem Fall eure Namen ein, damit wir besser planen können.</legend>
+              <label class="radio">
+                <input type="radio" name="attendance" value="yes" />
+                <span data-i18n="attending">Wir kommen</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="attendance" value="no" />
+                <span data-i18n="notAttending">Wir kommen nicht</span>
+              </label>
+            </fieldset>
 
-          <button type="submit" class="primary" data-i18n="submit">Antwort speichern</button>
-          <p class="disclaimer" data-i18n="disclaimer">Dieses Formular speichert keine Daten automatisch.</p>
-        </form>
-      </section>
+            <div id="guest-info" class="hidden" aria-live="polite">
+              <div id="guest-fields" class="guest-fields"></div>
+              <button type="button" id="add-guest-btn" class="secondary" data-i18n="addGuest">Weitere Person hinzufügen</button>
+            </div>
+
+            <button type="submit" class="primary" data-i18n="submit">Antwort speichern</button>
+          </form>
+        </section>
+      </div>
+
+      <div class="tab-panel" data-tab="info">
+        <section class="card" aria-labelledby="info-title">
+          <h2 id="info-title" data-i18n="infoTitle">Infos</h2>
+          <p data-i18n="infoText">
+            Hier könnt ihr später Infos wie Ablauf, Dresscode oder Anreise ergänzen.
+          </p>
+        </section>
+
+        <section class="card" aria-labelledby="dresscode-title">
+          <h2 id="dresscode-title" data-i18n="dresscodeTitle">Dresscode</h2>
+          <p data-i18n="dresscodeText">
+            Informationen zum Dresscode folgen in Kürze.
+          </p>
+        </section>
+
+        <section class="card" aria-labelledby="gifts-title">
+          <h2 id="gifts-title" data-i18n="giftsTitle">Geschenke</h2>
+          <p data-i18n="giftsText">
+            Informationen zu Geschenken folgen in Kürze.
+          </p>
+        </section>
+      </div>
     </main>
 
     <script src="config.js"></script>
