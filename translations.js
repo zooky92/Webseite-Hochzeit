@@ -31,7 +31,7 @@ const translations = {
       "Es gibt keinen festen Dresscode – wählt etwas, das zu einer Hochzeit am Meer passt und in dem ihr euch wohlfühlt. Denkt daran, dass es abends am Strand frischer werden kann. Bringt daher gerne einen Pullover, ein Jäckchen oder Ähnliches mit.",
     giftsTitle: "Geschenke",
     giftsText:
-      "Falls ihr uns etwas schenken möchtet, freuen wir uns sehr über einen Beitrag zu unserer Feier, bestenfalls per Überweisung oder PayPal. Uns ist bewusst, dass das etwas unkonventionell ist, aber wir möchten keine größeren Bargeldbeträge aus Kroatien mit nach Hause nehmen.<br /><br /><strong>PayPal:</strong> <a href=\"https://paypal.me/dennysk92\" target=\"_blank\" rel=\"noopener\">paypal.me/dennysk92</a><br /><strong>Überweisung:</strong> Name: Christian Denny Skupnjak, IBAN: DE 83 1203 0000 1054 7276 54",
+      "Falls ihr uns etwas schenken möchtet, freuen wir uns sehr über einen Beitrag zu unserer Feier, bestenfalls per Überweisung oder PayPal. Uns ist bewusst, dass das etwas unkonventionell ist, aber wir möchten keine größeren Bargeldbeträge aus Kroatien mit nach Hause nehmen.<br /><br /><strong>PayPal:</strong> <span id=\"paypal-link-de\">***</span><br /><strong>Überweisung:</strong> Name: Christian Denny Skupnjak, IBAN: <span id=\"iban-de\">***</span>",
     successMessage: "✓ Danke für eure Rückmeldung! Die Daten wurden gespeichert.",
     errorMessage: "Fehler beim Speichern. Bitte versuche es später erneut.",
     menuOptions: ["Fleisch", "Fisch", "Vegetarisch", "Vegan"],
@@ -67,7 +67,7 @@ const translations = {
       "There is no strict dress code – choose something that feels comfortable and suitable for a wedding by the sea. Please keep in mind that it can get cooler on the beach in the evening, so feel free to bring a light jumper, jacket or similar.",
     giftsTitle: "Gifts",
     giftsText:
-      "If you would like to give us a gift, we would be very happy about a contribution to our celebration, ideally via bank transfer or PayPal. We know this is a little unconventional, but we would prefer not to bring larger amounts of cash back home from Croatia.<br /><br /><strong>PayPal:</strong> <a href=\"https://paypal.me/dennysk92\" target=\"_blank\" rel=\"noopener\">paypal.me/dennysk92</a><br /><strong>Bank transfer:</strong> Name: Christian Denny Skupnjak, IBAN: DE 83 1203 0000 1054 7276 54",
+      "If you would like to give us a gift, we would be very happy about a contribution to our celebration, ideally via bank transfer or PayPal. We know this is a little unconventional, but we would prefer not to bring larger amounts of cash back home from Croatia.<br /><br /><strong>PayPal:</strong> <span id=\"paypal-link-en\">***</span><br /><strong>Bank transfer:</strong> Name: Christian Denny Skupnjak, IBAN: <span id=\"iban-en\">***</span>",
     successMessage: "✓ Thank you for your response! Your data has been saved.",
     errorMessage: "Error saving data. Please try again later.",
     menuOptions: ["Meat", "Fish", "Vegetarian", "Vegan"],
@@ -103,7 +103,7 @@ const translations = {
       "Ne postoji strogi dress code – odaberite odjeću u kojoj se osjećate ugodno i koja odgovara vjenčanju uz more. Imajte na umu da navečer na plaži može biti svježije, pa slobodno ponesite lagani pulover, jaknicu ili nešto slično.",
     giftsTitle: "Pokloni",
     giftsText:
-      "Ako nam želite donijeti dar, jako bismo se obradovali vašem doprinosu našoj proslavi, najbolje putem bankovne uplate ili PayPal-a. Znamo da je to pomalo neuobičajeno, ali radije ne bismo nosili veće iznose gotovine iz Hrvatske kući.<br /><br /><strong>PayPal:</strong> <a href=\"https://paypal.me/dennysk92\" target=\"_blank\" rel=\"noopener\">paypal.me/dennysk92</a><br /><strong>Bankovna uplata:</strong> Name: Christian Denny Skupnjak, IBAN: DE 83 1203 0000 1054 7276 54",
+      "Ako nam želite donijeti dar, jako bismo se obradovali vašem doprinosu našoj proslavi, najbolje putem bankovne uplate ili PayPal-a. Znamo da je to pomalo neuobičjeno, ali radije ne bismo nosili veće iznose gotovine iz Hrvatske kući.<br /><br /><strong>PayPal:</strong> <span id=\"paypal-link-hr\">***</span><br /><strong>Bankovna uplata:</strong> Name: Christian Denny Skupnjak, IBAN: <span id=\"iban-hr\">***</span>",
     successMessage: "✓ Hvala na odgovoru! Vaši podaci su spremljeni.",
     errorMessage: "Greška pri spremanju podataka. Molimo pokušajte kasnije.",
     menuOptions: ["Meso", "Riba", "Vegetarijansko", "Veganski"],

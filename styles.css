@@ -264,33 +264,43 @@ body {
 }
 
 .choice {
-  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
 }
 
-.choice legend {
+.choice-label {
   font-weight: 600;
-  margin-bottom: 8px;
-  width: 100%;
+  margin: 0 0 8px 0;
 }
 
-.radio {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
+.attendance-btn {
+  padding: 14px 20px;
   border-radius: 999px;
+  border: 2px solid var(--border);
   background: var(--accent-soft);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  border: 1px solid transparent;
+  transition: all 0.2s;
 }
 
-.radio input {
-  accent-color: var(--accent);
+.attendance-btn:hover {
+  border-color: var(--accent);
+  background: #e6d5c8;
+}
+
+.attendance-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+#attendance-input {
+  display: none;
 }
 
 .grid {
@@ -406,11 +416,14 @@ select:focus {
     padding: 22px;
   }
 
+  .choice {
+    flex-direction: column;
+    gap: 10px;
+  }
+
   .radio {
-    flex: 1;
-    min-width: 140px;
-    white-space: nowrap;
-    justify-content: center;
+    width: 100%;
+    padding: 14px 20px;
   }
 
   .primary {

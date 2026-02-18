@@ -1,5 +1,6 @@
 // ==================== PASSWORD PROTECTION ====================
 const CORRECT_PASSWORD = "mdh060626";
+const IBAN = "DE 83 1203 0000 1054 7276 54";
 
 function initPasswordProtection() {
   const overlay = document.getElementById("password-overlay");
@@ -12,6 +13,7 @@ function initPasswordProtection() {
   if (sessionStorage.getItem("passwordAuthenticated") === "true") {
     overlay.style.display = "none";
     mainContent.style.display = "block";
+    revealIBAN();
     return;
   }
 
@@ -21,6 +23,7 @@ function initPasswordProtection() {
       overlay.style.display = "none";
       mainContent.style.display = "block";
       errorMsg.textContent = "";
+      revealIBAN();
     } else {
       errorMsg.textContent = "Passwort falsch. Bitte versuchen Sie es erneut.";
       input.value = "";
@@ -39,11 +42,23 @@ function initPasswordProtection() {
   input.focus();
 }
 
-// ==================== RSVP FORM LOGIC ====================
-const guestFields = document.getElementById("guest-fields");
-const addGuestBtn = document.getElementById("add-guest-btn");
-const attendanceRadios = document.querySelectorAll("input[name='attendance']");
+function revealIBAN() {
+  // Nur nach Passwort-Authentifizierung zeigen
+  if (sessionStorage.getItem("passwordAuthenticated") === "true") {
+    // IBAN anzeigen
+    document.getElementById("iban-de").textContent = IBAN;
+    document.getElementById("iban-en").textContent = IBAN;
+    document.getElementById("iban-hr").textContent = IBAN;
+    
+    // PayPal-Links anzeigen
+    const paypalLink = '<a href="https://paypal.me/dennysk92" target="_blank" rel="noopener">paypal.me/dennysk92</a>';
+    document.getElementById("paypal-link-de").innerHTML = paypalLink;
+    document.getElementById("paypal-link-en").innerHTML = paypalLink;
+    document.getElementById("paypal-link-hr").innerHTML = paypalLink;
+  }
+}
 
+// ==================== RSVP FORM LOGIC ====================
 let guestCount = 0;
 
 function buildGuestField(index, includeMenu = true) {
@@ -116,6 +131,7 @@ const removeGuest = (index) => {
 };
 
 const addGuest = (includeMenu = true) => {
+  const guestFields = document.getElementById("guest-fields");
   const currentCount = document.querySelectorAll(".guest-card").length;
   const nextIndex = currentCount + 1;
   guestCount = nextIndex;
@@ -123,10 +139,11 @@ const addGuest = (includeMenu = true) => {
 };
 
 const updateGuestCardsLanguage = () => {
-  const attendanceInput = document.querySelector("input[name='attendance']:checked");
-  if (!attendanceInput) return;
+  const guestFields = document.getElementById("guest-fields");
+  const attendanceValue = document.getElementById("attendance-input").value;
+  if (!attendanceValue) return;
 
-  const includeMenu = attendanceInput.value === "yes";
+  const includeMenu = attendanceValue === "yes";
   const cards = document.querySelectorAll(".guest-card");
   if (!cards.length) return;
 
@@ -164,45 +181,28 @@ const updateGuestCardsLanguage = () => {
   });
 };
 
-attendanceRadios.forEach((radio) => {
-  radio.addEventListener("change", (event) => {
-    document.getElementById("guest-info").classList.remove("hidden");
-    guestFields.innerHTML = "";
-    guestCount = 0;
-    const isAttending = event.target.value === "yes";
-    addGuest(isAttending);
-  });
-});
-
-addGuestBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  const isAttending = document.querySelector("input[name='attendance']:checked")?.value === "yes";
-  addGuest(isAttending);
-});
-
-document.getElementById("rsvp-form").addEventListener("submit", (event) => {
-  event.preventDefault();
-  submitToGoogleSheets();
-});
-
 const submitToGoogleSheets = async () => {
   const lang = getCurrentLanguage();
   const form = document.getElementById("rsvp-form");
-  const formData = new FormData(form);
 
   const data = {
-    attendance: formData.get("attendance"),
+    attendance: document.getElementById("attendance-input").value,
     guests: [],
   };
 
   const guestCards = document.querySelectorAll(".guest-card");
   guestCards.forEach((card) => {
     const guestId = card.id.replace("guest-", "");
+    const firstNameInput = card.querySelector(`input[name='guest_${guestId}_firstName']`);
+    const lastNameInput = card.querySelector(`input[name='guest_${guestId}_lastName']`);
+    const menuSelect = card.querySelector(`select[name='guest_${guestId}_menu']`);
+    const intoleranceInput = card.querySelector(`input[name='guest_${guestId}_intolerances']`);
+    
     data.guests.push({
-      firstName: formData.get(`guest_${guestId}_firstName`),
-      lastName: formData.get(`guest_${guestId}_lastName`),
-      menu: formData.get(`guest_${guestId}_menu`),
-      intolerances: formData.get(`guest_${guestId}_intolerances`),
+      firstName: firstNameInput?.value || "",
+      lastName: lastNameInput?.value || "",
+      menu: menuSelect?.value || "",
+      intolerances: intoleranceInput?.value || "",
     });
   });
 
@@ -215,27 +215,79 @@ const submitToGoogleSheets = async () => {
 
     alert(getTranslation("successMessage", lang));
     form.reset();
+    const guestFields = document.getElementById("guest-fields");
     guestFields.innerHTML = "";
     guestCount = 0;
     document.getElementById("guest-info").classList.add("hidden");
+    
+    // Reset buttons
+    const attendanceBtns = document.querySelectorAll(".attendance-btn");
+    attendanceBtns.forEach((btn) => btn.classList.remove("active"));
+    document.getElementById("attendance-input").value = "";
   } catch (error) {
     console.error("Fehler beim Senden:", error);
     alert(getTranslation("errorMessage", lang));
   }
 };
 
+// ==================== DOM CONTENT LOADED ====================
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize password protection first
+  // Initialize password protection
   initPasswordProtection();
 
+  // Initialize form elements
+  const guestFields = document.getElementById("guest-fields");
+  const addGuestBtn = document.getElementById("add-guest-btn");
+  const attendanceInput = document.getElementById("attendance-input");
+  const guestInfo = document.getElementById("guest-info");
+  const attendanceBtns = document.querySelectorAll(".attendance-btn");
+  const form = document.getElementById("rsvp-form");
+
+  // Attendance button logic
+  attendanceBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const value = btn.getAttribute("data-value");
+      attendanceInput.value = value;
+
+      // Set active button
+      attendanceBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // Show guest info if attending
+      if (value === "yes") {
+        guestInfo.classList.remove("hidden");
+        if (guestFields.querySelectorAll(".guest-card").length === 0) {
+          addGuest(true);
+        }
+      } else {
+        guestInfo.classList.add("hidden");
+        guestFields.innerHTML = "";
+        guestCount = 0;
+      }
+    });
+  });
+
+  // Add guest button
+  addGuestBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    const isAttending = attendanceInput.value === "yes";
+    addGuest(isAttending);
+  });
+
+  // Form submit
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    submitToGoogleSheets();
+  });
+
+  // Language switcher
   const flagBtns = document.querySelectorAll(".flag-btn");
   flagBtns.forEach((btn) => {
     btn.addEventListener("click", (event) => {
       event.preventDefault();
       const lang = btn.getAttribute("data-lang");
       setLanguage(lang);
-
-      // Aktualisiere vorhandene Gästekarten in die neue Sprache
       updateGuestCardsLanguage();
 
       flagBtns.forEach((b) => b.classList.remove("active"));
@@ -246,23 +298,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentLang = getCurrentLanguage();
   document.querySelector(`.flag-btn[data-lang="${currentLang}"]`)?.classList.add("active");
 
-   const tabButtons = document.querySelectorAll(".tab-btn");
-   const tabPanels = document.querySelectorAll(".tab-panel");
+  // Tab switcher
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const tabPanels = document.querySelectorAll(".tab-panel");
 
-   tabButtons.forEach((btn) => {
-     btn.addEventListener("click", () => {
-       const target = btn.getAttribute("data-tab");
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const target = btn.getAttribute("data-tab");
 
-       tabButtons.forEach((b) => b.classList.remove("active"));
-       btn.classList.add("active");
+      tabButtons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
 
-       tabPanels.forEach((panel) => {
-         if (panel.getAttribute("data-tab") === target) {
-           panel.classList.add("tab-panel-active");
-         } else {
-           panel.classList.remove("tab-panel-active");
-         }
-       });
-     });
-   });
+      tabPanels.forEach((panel) => {
+        if (panel.getAttribute("data-tab") === target) {
+          panel.classList.add("tab-panel-active");
+        } else {
+          panel.classList.remove("tab-panel-active");
+        }
+      });
+    });
+  });
 });

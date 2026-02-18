@@ -62,17 +62,12 @@
           <h2 id="rsvp-title" data-i18n="rsvpTitle">Teilnahme</h2>
 
           <form id="rsvp-form" class="rsvp" novalidate>
-            <fieldset class="choice" aria-label="Teilnahme">
-              <legend data-i18n="decisionLabel">Sagt uns bitte Bescheid, ob ihr teilnehmt oder nicht, und tragt in jedem Fall eure Namen ein, damit wir besser planen können.</legend>
-              <label class="radio">
-                <input type="radio" name="attendance" value="yes" />
-                <span data-i18n="attending">Wir kommen</span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="attendance" value="no" />
-                <span data-i18n="notAttending">Wir kommen nicht</span>
-              </label>
-            </fieldset>
+            <div class="choice" aria-label="Teilnahme">
+              <p class="choice-label" data-i18n="decisionLabel">Sagt uns bitte Bescheid, ob ihr teilnehmt oder nicht, und tragt in jedem Fall eure Namen ein, damit wir besser planen können.</p>
+              <button type="button" class="attendance-btn" data-value="yes" data-i18n="attending">Wir kommen</button>
+              <button type="button" class="attendance-btn" data-value="no" data-i18n="notAttending">Wir kommen nicht</button>
+              <input type="hidden" name="attendance" id="attendance-input" />
+            </div>
 
             <div id="guest-info" class="hidden" aria-live="polite">
               <div id="guest-fields" class="guest-fields"></div>
