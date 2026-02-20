@@ -9,6 +9,10 @@ function initPasswordProtection() {
   const errorMsg = document.getElementById("password-error");
   const mainContent = document.getElementById("main-content");
 
+  // Stelle sicher, dass die Übersetzungen geladen sind
+  const lang = getCurrentLanguage();
+  updatePageLanguage(lang);
+
   // Check if password was already entered in this session
   if (sessionStorage.getItem("passwordAuthenticated") === "true") {
     overlay.style.display = "none";
@@ -46,15 +50,23 @@ function revealIBAN() {
   // Nur nach Passwort-Authentifizierung zeigen
   if (sessionStorage.getItem("passwordAuthenticated") === "true") {
     // IBAN anzeigen
-    document.getElementById("iban-de").textContent = IBAN;
-    document.getElementById("iban-en").textContent = IBAN;
-    document.getElementById("iban-hr").textContent = IBAN;
+    const ibanDe = document.getElementById("iban-de");
+    const ibanEn = document.getElementById("iban-en");
+    const ibanHr = document.getElementById("iban-hr");
+    
+    if (ibanDe) ibanDe.textContent = IBAN;
+    if (ibanEn) ibanEn.textContent = IBAN;
+    if (ibanHr) ibanHr.textContent = IBAN;
     
     // PayPal-Links anzeigen
     const paypalLink = '<a href="https://paypal.me/dennysk92" target="_blank" rel="noopener">paypal.me/dennysk92</a>';
-    document.getElementById("paypal-link-de").innerHTML = paypalLink;
-    document.getElementById("paypal-link-en").innerHTML = paypalLink;
-    document.getElementById("paypal-link-hr").innerHTML = paypalLink;
+    const paypalLinkDe = document.getElementById("paypal-link-de");
+    const paypalLinkEn = document.getElementById("paypal-link-en");
+    const paypalLinkHr = document.getElementById("paypal-link-hr");
+    
+    if (paypalLinkDe) paypalLinkDe.innerHTML = paypalLink;
+    if (paypalLinkEn) paypalLinkEn.innerHTML = paypalLink;
+    if (paypalLinkHr) paypalLinkHr.innerHTML = paypalLink;
   }
 }
 
