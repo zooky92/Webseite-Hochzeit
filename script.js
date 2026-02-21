@@ -197,12 +197,10 @@ const submitToGoogleSheets = async () => {
   const lang = getCurrentLanguage();
   const form = document.getElementById("rsvp-form");
 
-  const data = {
-    attendance: document.getElementById("attendance-input").value,
-    guests: [],
-  };
-
   const guestCards = document.querySelectorAll(".guest-card");
+  const guestData = [];
+
+  // Alle Gäste sammeln
   guestCards.forEach((card) => {
     const guestId = card.id.replace("guest-", "");
     const firstNameInput = card.querySelector(`input[name='guest_${guestId}_firstName']`);
@@ -210,7 +208,7 @@ const submitToGoogleSheets = async () => {
     const menuSelect = card.querySelector(`select[name='guest_${guestId}_menu']`);
     const intoleranceInput = card.querySelector(`input[name='guest_${guestId}_intolerances']`);
     
-    data.guests.push({
+    guestData.push({
       firstName: firstNameInput?.value || "",
       lastName: lastNameInput?.value || "",
       menu: menuSelect?.value || "",
@@ -219,12 +217,24 @@ const submitToGoogleSheets = async () => {
   });
 
   // Validierung: Vor- und Nachname sind erforderlich
-  for (const guest of data.guests) {
+  for (const guest of guestData) {
     if (!guest.firstName.trim() || !guest.lastName.trim()) {
       alert(getTranslation("validationError", lang));
       return;
     }
   }
+
+  // Datenstruktur vorbereiten: Erster Gast ist der Antworter
+  const data = {
+    firstName: guestData[0]?.firstName || "",
+    lastName: guestData[0]?.lastName || "",
+    attendance: document.getElementById("attendance-input").value,
+    guests: guestData.slice(1).map(guest => ({
+      firstName: guest.firstName,
+      menu: guest.menu,
+      intolerances: guest.intolerances,
+    })),
+  };
 
   try {
     const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
