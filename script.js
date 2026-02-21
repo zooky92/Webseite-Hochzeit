@@ -196,6 +196,12 @@ const updateGuestCardsLanguage = () => {
 const submitToGoogleSheets = async () => {
   const lang = getCurrentLanguage();
   const form = document.getElementById("rsvp-form");
+  const submitBtn = form.querySelector("button[type='submit']");
+
+  // Button deaktivieren, um Doppelklicks zu vermeiden
+  submitBtn.disabled = true;
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = getTranslation("submitting", lang) || "Wird gespeichert...";
 
   const guestCards = document.querySelectorAll(".guest-card");
   const guestData = [];
@@ -220,6 +226,9 @@ const submitToGoogleSheets = async () => {
   for (const guest of guestData) {
     if (!guest.firstName.trim() || !guest.lastName.trim()) {
       alert(getTranslation("validationError", lang));
+      // Button wieder aktivieren bei Validierungsfehler
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
       return;
     }
   }
@@ -260,6 +269,9 @@ const submitToGoogleSheets = async () => {
   } catch (error) {
     console.error("Fehler beim Senden:", error);
     alert(getTranslation("errorMessage", lang));
+    // Button wieder aktivieren bei Fehler
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
   }
 };
 
