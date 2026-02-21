@@ -36,7 +36,7 @@ const translations = {
     successMessage: "✓ Danke für eure Rückmeldung! Die Daten wurden gespeichert.",
     errorMessage: "Fehler beim Speichern. Bitte versuche es später erneut.",
     validationError: "Bitte füllt Vor- und Nachname für alle Personen aus.",
-    menuOptions: ["Fleisch", "Fisch", "Vegetarisch", "Vegan"],
+    menuOptions: ["Fleisch (Rind)", "Fisch", "Vegetarisch", "Vegan"],
   },
   en: {
     eyebrow: "Our Wedding",
@@ -74,7 +74,7 @@ const translations = {
     successMessage: "✓ Thank you for your response! Your data has been saved.",
     errorMessage: "Error saving data. Please try again later.",
     validationError: "Please fill in first and last name for all people.",
-    menuOptions: ["Meat", "Fish", "Vegetarian", "Vegan"],
+    menuOptions: ["Meat (Beef)", "Fish", "Vegetarian", "Vegan"],
   },
   hr: {
     eyebrow: "Naše vjenčanje",
@@ -112,7 +112,7 @@ const translations = {
     successMessage: "✓ Hvala na odgovoru! Vaši podaci su spremljeni.",
     errorMessage: "Greška pri spremanju podataka. Molimo pokušajte kasnije.",
     validationError: "Molimo ispunite ime i prezime za sve osobe.",
-    menuOptions: ["Meso", "Riba", "Vegetarijansko", "Veganski"],
+    menuOptions: ["Meso (Govedina)", "Riba", "Vegetarijansko", "Veganski"],
   },
 };
 
