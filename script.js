@@ -266,6 +266,10 @@ const submitToGoogleSheets = async () => {
     const attendanceBtns = document.querySelectorAll(".attendance-btn");
     attendanceBtns.forEach((btn) => btn.classList.remove("active"));
     document.getElementById("attendance-input").value = "";
+    
+    // Submit-Button wieder aktivieren
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
   } catch (error) {
     console.error("Fehler beim Senden:", error);
     alert(getTranslation("errorMessage", lang));
