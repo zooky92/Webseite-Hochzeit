@@ -34,6 +34,7 @@ const translations = {
       "Falls ihr uns etwas schenken möchtet, freuen wir uns sehr über einen Beitrag zu unserer Feier, bestenfalls per Überweisung oder PayPal. Uns ist bewusst, dass das etwas unkonventionell ist, aber wir möchten keine größeren Bargeldbeträge aus Kroatien mit nach Hause nehmen.<br /><br /><strong>PayPal:</strong> <span id=\"paypal-link-de\">***</span><br /><strong>Überweisung:</strong> Name: Christian Denny Skupnjak, IBAN: <span id=\"iban-de\">***</span>",
     successMessage: "✓ Danke für eure Rückmeldung! Die Daten wurden gespeichert.",
     errorMessage: "Fehler beim Speichern. Bitte versuche es später erneut.",
+    validationError: "Bitte füllt Vor- und Nachname für alle Personen aus.",
     menuOptions: ["Fleisch", "Fisch", "Vegetarisch", "Vegan"],
   },
   en: {
@@ -70,6 +71,7 @@ const translations = {
       "If you would like to give us a gift, we would be very happy about a contribution to our celebration, ideally via bank transfer or PayPal. We know this is a little unconventional, but we would prefer not to bring larger amounts of cash back home from Croatia.<br /><br /><strong>PayPal:</strong> <span id=\"paypal-link-en\">***</span><br /><strong>Bank transfer:</strong> Name: Christian Denny Skupnjak, IBAN: <span id=\"iban-en\">***</span>",
     successMessage: "✓ Thank you for your response! Your data has been saved.",
     errorMessage: "Error saving data. Please try again later.",
+    validationError: "Please fill in first and last name for all people.",
     menuOptions: ["Meat", "Fish", "Vegetarian", "Vegan"],
   },
   hr: {
@@ -106,6 +108,7 @@ const translations = {
       "Ako nam želite donijeti dar, jako bismo se obradovali vašem doprinosu našoj proslavi, najbolje putem bankovne uplate ili PayPal-a. Znamo da je to pomalo neuobičjeno, ali radije ne bismo nosili veće iznose gotovine iz Hrvatske kući.<br /><br /><strong>PayPal:</strong> <span id=\"paypal-link-hr\">***</span><br /><strong>Bankovna uplata:</strong> Name: Christian Denny Skupnjak, IBAN: <span id=\"iban-hr\">***</span>",
     successMessage: "✓ Hvala na odgovoru! Vaši podaci su spremljeni.",
     errorMessage: "Greška pri spremanju podataka. Molimo pokušajte kasnije.",
+    validationError: "Molimo ispunite ime i prezime za sve osobe.",
     menuOptions: ["Meso", "Riba", "Vegetarijansko", "Veganski"],
   },
 };

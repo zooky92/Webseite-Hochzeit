@@ -218,6 +218,14 @@ const submitToGoogleSheets = async () => {
     });
   });
 
+  // Validierung: Vor- und Nachname sind erforderlich
+  for (const guest of data.guests) {
+    if (!guest.firstName.trim() || !guest.lastName.trim()) {
+      alert(getTranslation("validationError", lang));
+      return;
+    }
+  }
+
   try {
     const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
       method: "POST",
