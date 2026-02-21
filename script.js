@@ -226,11 +226,14 @@ const submitToGoogleSheets = async () => {
 
   // Datenstruktur vorbereiten: Erster Gast ist der Antworter
   const data = {
+    attendance: document.getElementById("attendance-input").value,
     firstName: guestData[0]?.firstName || "",
     lastName: guestData[0]?.lastName || "",
-    attendance: document.getElementById("attendance-input").value,
+    menu: guestData[0]?.menu || "",
+    intolerances: guestData[0]?.intolerances || "",
     guests: guestData.slice(1).map(guest => ({
       firstName: guest.firstName,
+      lastName: guest.lastName,
       menu: guest.menu,
       intolerances: guest.intolerances,
     })),

@@ -5,13 +5,15 @@
    - Neue Tabelle: "Hochzeitsgäste"
    - Spaltenköpfe (Reihe 1):
      - A: Timestamp
-     - B: Vorname
-     - C: Nachname
-     - D: Teilnahme (ja/nein)
-     - E: Gast 1 Name
-     - F: Gast 1 Menü
-     - G: Gast 1 Unverträglichkeiten
-     - H: Gast 2 Name, usw.
+     - B: Teilnahme (ja/nein)
+     - C: Gast 1 Vorname
+     - D: Gast 1 Nachname
+     - E: Gast 1 Menü
+     - F: Gast 1 Unverträglichkeiten
+     - G: Gast 2 Vorname
+     - H: Gast 2 Nachname
+     - I: Gast 2 Menü
+     - J: Gast 2 Unverträglichkeiten, usw.
 
 2. **Google Apps Script erstellen:**
    - Klicke `Erweiterungen > Apps Script`
@@ -26,15 +28,18 @@ function doPost(e) {
   
   const row = [
     new Date(),
+    data.attendance || "",
     data.firstName || "",
     data.lastName || "",
-    data.attendance || "",
+    data.menu || "",
+    data.intolerances || "",
   ];
   
   // Gäste hinzufügen
   if (data.guests && data.guests.length > 0) {
     data.guests.forEach(guest => {
       row.push(guest.firstName || "");
+      row.push(guest.lastName || "");
       row.push(guest.menu || "");
       row.push(guest.intolerances || "");
     });
