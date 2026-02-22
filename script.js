@@ -87,6 +87,7 @@ function buildGuestField(index, includeMenu = true) {
   const nameInput = document.createElement("input");
   nameInput.type = "text";
   nameInput.name = `guest_${index}_firstName`;
+  nameInput.required = true;
   nameLabel.appendChild(nameInput);
 
   const lastNameLabel = document.createElement("label");
@@ -94,6 +95,7 @@ function buildGuestField(index, includeMenu = true) {
   const lastNameInput = document.createElement("input");
   lastNameInput.type = "text";
   lastNameInput.name = `guest_${index}_lastName`;
+  lastNameInput.required = true;
   lastNameLabel.appendChild(lastNameInput);
 
   const removeBtn = document.createElement("button");
@@ -303,16 +305,10 @@ document.addEventListener("DOMContentLoaded", () => {
       attendanceBtns.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
 
-      // Show guest info if attending
-      if (value === "yes") {
-        guestInfo.classList.remove("hidden");
-        if (guestFields.querySelectorAll(".guest-card").length === 0) {
-          addGuest(true);
-        }
-      } else {
-        guestInfo.classList.add("hidden");
-        guestFields.innerHTML = "";
-        guestCount = 0;
+      // Show guest info for both attending and not attending
+      guestInfo.classList.remove("hidden");
+      if (guestFields.querySelectorAll(".guest-card").length === 0) {
+        addGuest(value === "yes");
       }
     });
   });
