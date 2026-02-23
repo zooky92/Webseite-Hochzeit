@@ -20,6 +20,7 @@ const translations = {
     intolerances: "Unverträglichkeiten",
     addGuest: "Weitere Person hinzufügen",
     removeGuest: "Person entfernen",
+    person: "Person",
     submit: "Antwort speichern",
     submitting: "Wird gespeichert...",
     tabRsvp: "Zu- / Absage",
@@ -58,6 +59,7 @@ const translations = {
     intolerances: "Dietary Restrictions",
     addGuest: "Add Another Person",
     removeGuest: "Remove Person",
+    person: "Person",
     submit: "Submit Response",
     submitting: "Saving...",
     tabRsvp: "Attendance",
@@ -80,9 +82,9 @@ const translations = {
     eyebrow: "Naše vjenčanje",
     title: "Marisa &amp; Denny",
     subtitle:
-      "Veselili bismo se kada biste s nama proslavili ovaj poseban dan.<br /><br />Molimo vas da neposredno prije puta u Hrvatsku još jednom pogledate ovu stranicu – još dovršavamo planiranje i ovdje ćemo po potrebi objaviti dodatne informacije.",
+      "Veselimo se da ćete sa nama proslaviti na poseban dan.<br /><br />Molimo vas da neposredno prije puta na Bra još jednom pogledate ovu stranicu – još dovršavamo planiranje i ovdje ćemo po potrebi objaviti dodatne informacije.",
     inviteTitle: "Pozivnica",
-    inviteText: "Molimo vas da nam do kraja ožujka javite možete li doći. Čekamo vas na nezaboravnom danu s vama.",
+    inviteText: "Molimo vas da nam do kraja ožujka potvrdite vaš dolazak.",
     location:
       "<strong>Lokacije:</strong><br />1. Dominikanski samostan Bol (<a href=\"https://share.google/I2UkDVTJ7CKRACqpU\" target=\"_blank\" rel=\"noopener\">karta</a>)<br />2. Noa Beach Club Bol (<a href=\"https://share.google/UyiFeStBqlmllNgeF\" target=\"_blank\" rel=\"noopener\">karta</a>)",
     note: "Vaš odgovor nam jako pomaže u planiranju.",
@@ -93,9 +95,10 @@ const translations = {
     firstName: "Ime",
     lastName: "Prezime",
     menu: "Meni",
-    intolerances: "Alergije i prehrambene potrebe",
+    intolerances: "Alergije na prehrambene proi",
     addGuest: "Dodaj još jednu osobu",
     removeGuest: "Ukloni osobu",
+    person: "Gost",
     submit: "Pošalji odgovor",
     submitting: "Spremlam...",
     tabRsvp: "Dolazak / nedolazak",
@@ -105,14 +108,14 @@ const translations = {
       "Do Splita možete doputovati avionom (zračna luka Split) ili autom. Iz Splita trajektom putujete do Supetra na Braču, a zatim automobilom ili taksijem do Bola.<br /><br />Smještaj u Bolu možete pronaći putem Airbnb-a ili Booking.com-a (<a href=\"https://www.booking.com/searchresults.de.html?ss=Bol&amp;ssne=Bol&amp;ssne_untouched=Bol&amp;efdco=1&amp;label=gen173nr-10CAEoggI46AdIM1gEaDuIAQGYATO4AQfIAQ3YAQPoAQH4AQGIAgGoAgG4AujCzcwGwAIB0gIkNjI4NDE4Y2EtNGFkZS00ODJlLWFlMGItNjg4MTJmNjAxZjFi2AIB4AIB&amp;aid=304142&amp;lang=de&amp;sb=1&amp;src_elem=sb&amp;src=searchresults&amp;dest_id=-75647&amp;dest_type=city&amp;checkin=2026-03-12&amp;checkout=2026-03-13&amp;ltfd=1%3A5%3A6-2026%3A1%3A&amp;group_adults=2&amp;no_rooms=1&amp;group_children=0\" target=\"_blank\" rel=\"noopener\">link</a>).<br /><br />Naša organizatorica vjenčanja također je preporučila sljedeće hotele u Bolu: Hotel Borak, Hotel Elaphusa, Hotel Bluesun i Hotel Vitar. Imajte na umu da mi osobno još nismo odsjeli ni u jednom od ovih hotela.",
     dresscodeTitle: "Dresscode",
     dresscodeText:
-      "Ne postoji strogi dress code – odaberite odjeću u kojoj se osjećate ugodno i koja odgovara vjenčanju uz more. Imajte na umu da navečer na plaži može biti svježije, pa slobodno ponesite lagani pulover, jaknicu ili nešto slično.",
+      "Ne postoji strogi dress code – odaberite odjeću u kojoj se osjećate ugodno i koja odgovara proslavi uz more. Imajte na umu da navečer na plaži može biti svježije, pa slobodno ponesite lagani pulover, jaknicu ili nešto slično.",
     giftsTitle: "Pokloni",
     giftsText:
-      "Ako nam želite donijeti dar, jako bismo se obradovali vašem doprinosu našoj proslavi, najbolje putem bankovne uplate ili PayPal-a. Znamo da je to pomalo neuobičjeno, ali radije ne bismo nosili veće iznose gotovine iz Hrvatske kući.<br /><br /><strong>PayPal:</strong> <span id=\"paypal-link-hr\">***</span><br /><strong>Bankovna uplata:</strong> Name: Christian Denny Skupnjak, IBAN: <span id=\"iban-hr\">***</span>",
+      "Ako nas želite darivati, obradovali bismo se vašem novčanom doprinosu našoj proslavi, najednostavnije putem bankovne uplate ili PayPal-a jer ne želimo nositi veće iznose gotovine iz Hrvatske.<br /><br /><strong>PayPal:</strong> <span id=\"paypal-link-hr\">***</span><br /><strong>Bankovna uplata:</strong> Name: Christian Denny Skupnjak, IBAN: <span id=\"iban-hr\">***</span>",
     successMessage: "✓ Hvala na odgovoru! Vaši podaci su spremljeni.",
     errorMessage: "Greška pri spremanju podataka. Molimo pokušajte kasnije.",
     validationError: "Molimo ispunite ime i prezime za sve osobe.",
-    menuOptions: ["Meso (Govedina)", "Riba", "Vegetarijansko", "Veganski"],
+    menuOptions: ["Meso (Govedina/Steak)", "Riba", "Vegetarijansko", "Veganski"],
   },
 };
 
@@ -149,4 +152,8 @@ function updatePageLanguage(lang) {
 document.addEventListener("DOMContentLoaded", () => {
   const lang = getCurrentLanguage();
   updatePageLanguage(lang);
+  // Offenbare IBAN und PayPal nach Sprachinitialisierung
+  if (typeof revealIBAN === 'function') {
+    revealIBAN();
+  }
 });

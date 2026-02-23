@@ -80,7 +80,7 @@ function buildGuestField(index, includeMenu = true) {
   wrapper.id = `guest-${index}`;
 
   const title = document.createElement("h3");
-  title.textContent = `Person ${index}`;
+  title.textContent = `${getTranslation("person", lang)} ${index}`;
 
   const nameLabel = document.createElement("label");
   nameLabel.textContent = getTranslation("firstName", lang);
@@ -334,6 +334,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const lang = btn.getAttribute("data-lang");
       setLanguage(lang);
       updateGuestCardsLanguage();
+      // Offenbare IBAN und PayPal nach Sprachenwechsel
+      revealIBAN();
 
       flagBtns.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
