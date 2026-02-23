@@ -43,7 +43,7 @@ const translations = {
     eyebrow: "Our Wedding",
     title: "Marisa &amp; Denny",
     subtitle:
-      "We would be delighted if you shared this special day with us.<br /><br />Please have another look at this website shortly before you travel to Croatia – we are still finalising some details and may share additional information here.",
+      "<strong>Date:</strong> 06.06.26 | <strong>Start:</strong> 14:00 | <strong>Meeting point:</strong> Dominican Monastery Bol<br /><br />Please have another look at this website shortly before you travel to Croatia – we are still finalising some details and may share additional information here.",
     inviteTitle: "Invitation",
     inviteText: "Please let us know by the end of March if you can make it. We look forward to an unforgettable day with you.",
     location:
@@ -82,7 +82,7 @@ const translations = {
     eyebrow: "Naše vjenčanje",
     title: "Marisa &amp; Denny",
     subtitle:
-      "Veselimo se da ćete sa nama proslaviti na poseban dan.<br /><br />Molimo vas da neposredno prije puta na Bra još jednom pogledate ovu stranicu – još dovršavamo planiranje i ovdje ćemo po potrebi objaviti dodatne informacije.",
+      "<strong>Datum:</strong> 06.06.26 | <strong>Početak:</strong> 14:00 | <strong>Mjesto sastanka:</strong> Dominikanski samostan Bol<br /><br />Molimo vas da neposredno prije puta na Brač još jednom pogledate ovu stranicu – još dovršavamo planiranje i ovdje ćemo po potrebi objaviti dodatne informacije.",
     inviteTitle: "Pozivnica",
     inviteText: "Molimo vas da nam do kraja ožujka potvrdite vaš dolazak.",
     location:
@@ -111,7 +111,7 @@ const translations = {
       "Ne postoji strogi dress code – odaberite odjeću u kojoj se osjećate ugodno i koja odgovara proslavi uz more. Imajte na umu da navečer na plaži može biti svježije, pa slobodno ponesite lagani pulover, jaknicu ili nešto slično.",
     giftsTitle: "Pokloni",
     giftsText:
-      "Ako nas želite darivati, obradovali bismo se novčanom doprinosu našoj proslavi, najednostavnije putem bankovne uplate ili PayPal-a jer ne želimo nositi veće iznose gotovine iz Hrvatske.<br /><br /><strong>PayPal:</strong> <span id=\"paypal-link-hr\">***</span><br /><strong>Bankovna uplata:</strong> Name: Christian Denny Skupnjak, IBAN: <span id=\"iban-hr\">***</span>",
+      "Ako nas želite darivati, obradovali bismo se novčanom doprinosu našoj proslavi,  putem bankovne uplate ili PayPal-a jer ne želimo nositi veće iznose gotovine iz Hrvatske.<br /><br /><strong>PayPal:</strong> <span id=\"paypal-link-hr\">***</span><br /><strong>Bankovna uplata:</strong> Name: Christian Denny Skupnjak, IBAN: <span id=\"iban-hr\">***</span>",
     successMessage: "✓ Hvala na odgovoru! Vaši podaci su spremljeni.",
     errorMessage: "Greška pri spremanju podataka. Molimo pokušajte kasnije.",
     validationError: "Molimo ispunite ime i prezime za sve osobe.",
