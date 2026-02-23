@@ -111,7 +111,7 @@ const translations = {
       "Ne postoji strogi dress code – odaberite odjeću u kojoj se osjećate ugodno i koja odgovara proslavi uz more. Imajte na umu da navečer na plaži može biti svježije, pa slobodno ponesite lagani pulover, jaknicu ili nešto slično.",
     giftsTitle: "Pokloni",
     giftsText:
-      "Ako nas želite darivati, obradovali bismo se vašem novčanom doprinosu našoj proslavi, najednostavnije putem bankovne uplate ili PayPal-a jer ne želimo nositi veće iznose gotovine iz Hrvatske.<br /><br /><strong>PayPal:</strong> <span id=\"paypal-link-hr\">***</span><br /><strong>Bankovna uplata:</strong> Name: Christian Denny Skupnjak, IBAN: <span id=\"iban-hr\">***</span>",
+      "Ako nas želite darivati, obradovali bismo se novčanom doprinosu našoj proslavi, najednostavnije putem bankovne uplate ili PayPal-a jer ne želimo nositi veće iznose gotovine iz Hrvatske.<br /><br /><strong>PayPal:</strong> <span id=\"paypal-link-hr\">***</span><br /><strong>Bankovna uplata:</strong> Name: Christian Denny Skupnjak, IBAN: <span id=\"iban-hr\">***</span>",
     successMessage: "✓ Hvala na odgovoru! Vaši podaci su spremljeni.",
     errorMessage: "Greška pri spremanju podataka. Molimo pokušajte kasnije.",
     validationError: "Molimo ispunite ime i prezime za sve osobe.",
